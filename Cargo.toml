@@ -1,21 +1,25 @@
 [package]
-name = "serde-cw-value"
+name = "serde-value-wasm"
 version = "0.7.0"
-authors = ["arcmx", "Bartłomiej Kuras"]
+authors = ["arcmx", "Bartłomiej Kuras", "CyberHoward", "Nicolas"]
 edition = "2018"
 
 description = "Serialization value trees for CosmWasm"
-repository = "https://github.com/hashedone/serde-cw-value"
+repository = "https://github.com/Abstract-OS/serde-value-wasm"
 readme = "README.md"
 keywords = ["serde", "wasm"]
 license = "MIT"
 
 [features]
+# Implement `JsonSchema` on `Value`
 json_schema = []
+# Implement `Into<CosmosMsg>` for use in CosmWasm responses
+cosmos_msg = []
 
 [dependencies]
 serde = "^1.0.0"
-schemars = { version = "0.8.11", default-features = false, cfg = "feature = \"json_schema\""}
+schemars = { version = "0.8", default-features = false}
+cosmwasm-std = { version = "1.2", default-features = false }
 
 [dev-dependencies]
 serde_derive = "^1.0.0"
