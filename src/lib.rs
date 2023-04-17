@@ -131,6 +131,14 @@ impl Into<cosmwasm_std::CosmosMsg<Value>> for Value {
     }
 }
 
+#[cfg(feature = "cosmos_msg")]
+#[test]
+fn into_cosmos_msg() {
+    let value = Value::String("hello".to_string());
+    let msg: cosmwasm_std::CosmosMsg<Value> = value.clone().into();
+    assert_eq!(msg, cosmwasm_std::CosmosMsg::Custom(value));
+}
+
 impl Value {
     fn discriminant(&self) -> usize {
         match *self {
@@ -189,7 +197,7 @@ impl PartialOrd for Value {
 }
 
 #[cfg(test)]
-use serde_derive::{Deserialize, Serialize};
+use serde_derive::{Deserialize as DeserializeDerive, Serialize};
 
 #[test]
 fn de_smoke_test() {
@@ -250,7 +258,7 @@ fn ser_smoke_test() {
 
 #[test]
 fn deserialize_into_enum() {
-    #[derive(Deserialize, Debug, PartialEq, Eq)]
+    #[derive(DeserializeDerive, Debug, PartialEq, Eq)]
     enum Foo {
         Bar,
         Baz(u8),
@@ -398,7 +406,7 @@ fn deserialize_inside_deserialize_impl() {
 
 #[test]
 fn deserialize_newtype() {
-    #[derive(Debug, Deserialize, PartialEq)]
+    #[derive(Debug, DeserializeDerive, PartialEq)]
     struct Foo(i32);
 
     let input = Value::I32(5);
@@ -408,10 +416,10 @@ fn deserialize_newtype() {
 
 #[test]
 fn deserialize_newtype2() {
-    #[derive(Debug, Deserialize, PartialEq)]
+    #[derive(Debug, DeserializeDerive, PartialEq)]
     struct Foo(i32);
 
-    #[derive(Debug, Deserialize, PartialEq)]
+    #[derive(Debug, DeserializeDerive, PartialEq)]
     struct Bar {
         foo: Foo,
     }
