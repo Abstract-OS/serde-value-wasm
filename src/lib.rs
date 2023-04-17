@@ -125,9 +125,9 @@ impl schemars::JsonSchema for Value {
 }
 
 #[cfg(feature = "cosmos_msg")]
-impl Into<cosmwasm_std::CosmosMsg<Value>> for Value {
-    fn into(self) -> cosmwasm_std::CosmosMsg<Value> {
-        cosmwasm_std::CosmosMsg::<Value>::Custom(self)
+impl From<Value> for cosmwasm_std::CosmosMsg<Value> {
+    fn from(msg: Value) -> Self {
+        cosmwasm_std::CosmosMsg::<Value>::Custom(msg)
     }
 }
 
