@@ -14,7 +14,7 @@ license = "MIT"
 # Implement `JsonSchema` on `Value`
 json_schema = []
 # Implement `Into<CosmosMsg>` for use in CosmWasm responses
-cosmos_msg = []
+cosmos_msg = ["json_schema"]
 
 [dependencies]
 serde = "^1.0.0"

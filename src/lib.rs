@@ -125,11 +125,15 @@ impl schemars::JsonSchema for Value {
 }
 
 #[cfg(feature = "cosmos_msg")]
+impl cosmwasm_std::CustomMsg for Value {}
+
+#[cfg(feature = "cosmos_msg")]
 impl From<Value> for cosmwasm_std::CosmosMsg<Value> {
     fn from(msg: Value) -> Self {
         cosmwasm_std::CosmosMsg::<Value>::Custom(msg)
     }
 }
+
 
 #[cfg(feature = "cosmos_msg")]
 #[test]
