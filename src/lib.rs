@@ -119,8 +119,15 @@ impl schemars::JsonSchema for Value {
         "JSON".to_string()
     }
 
-    fn json_schema(gen: &mut schemars::gen::SchemaGenerator) -> schemars::schema::Schema {
+    fn json_schema(_gen: &mut schemars::gen::SchemaGenerator) -> schemars::schema::Schema {
         schemars::schema::Schema::from(true)
+    }
+}
+
+#[cfg(feature = "cosmos_msg")]
+impl Into<cosmwasm_std::CosmosMsg<Value>> for Value {
+    fn into(self) -> cosmwasm_std::CosmosMsg<Value> {
+        cosmwasm_std::CosmosMsg::<Value>::Custom(self)
     }
 }
 
