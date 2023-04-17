@@ -1,6 +1,6 @@
 # serde-value
 
-`serde-cw-value` provides a way to capture serialization value trees for later
+`serde-value-wasm` provides a way to capture serialization value trees for later
 processing. Crate is designed to work with CosmWasm smart contracts, in
 particular - it errors early when any floating-point types are processed. This
 is for of [serde-value](https://github.com/arcnmx/serde-value).
@@ -9,8 +9,8 @@ is for of [serde-value](https://github.com/arcnmx/serde-value).
 
 Add the library to the project with `cargo add`:
 
-```
-cargo add serde-cw-value
+```bash
+cargo add serde-value-wasm
 ```
 
 Then you can deserialize any serde source to intermediate
